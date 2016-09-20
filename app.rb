@@ -24,8 +24,8 @@ def retrieve_songs url
   songs = tracks.map do |t|
     {
       name: t['songName'],
-      artist: t['artist_name'],
-      album: t["album_name"],
+      artist: CGI.unescapeHTML(t['artist_name']),
+      album: CGI.unescapeHTML(t["album_name"]),
       cover: t["pic"].gsub('_1.jpg','_2.jpg'),
       url: decode(t["location"])
     }
