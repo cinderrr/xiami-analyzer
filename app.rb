@@ -38,6 +38,11 @@ before do
   headers 'Access-Control-Allow-Origin' => '*'
 end
 
+get '/' do
+  content_type :html
+  'GET /song/:id<br>GET /collection/:id'
+end
+
 get '/song/:id' do
   retrieve_songs "http://www.xiami.com/song/playlist/id/#{params[:id]}/type/0/cat/json"
 end
