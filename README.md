@@ -2,4 +2,6 @@
 
 GET /song/:id
 
+GET /album/:id
+
 GET /collection/:id

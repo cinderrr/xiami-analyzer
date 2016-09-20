@@ -23,11 +23,11 @@ def retrieve_songs url
   tracks = json['data']['trackList']
   songs = tracks.map do |t|
     {
-      title: t['title'],
-      artist: t['artist'],
+      name: t['songName'],
+      artist: t['artist_name'],
       album: t["album_name"],
       cover: t["pic"].gsub('_1.jpg','_2.jpg'),
-      mp3: decode(t["location"])
+      url: decode(t["location"])
     }
   end
   songs.to_json
@@ -40,11 +40,15 @@ end
 
 get '/' do
   content_type :html
-  'GET /song/:id<br>GET /collection/:id'
+  'GET /song/:id<br>GET /album/:id<br>GET /collection/:id'
 end
 
 get '/song/:id' do
   retrieve_songs "http://www.xiami.com/song/playlist/id/#{params[:id]}/type/0/cat/json"
+end
+
+get '/album/:id' do
+  retrieve_songs "http://www.xiami.com/song/playlist/id/#{params[:id]}/type/1/cat/json"
 end
 
 get '/collection/:id' do
